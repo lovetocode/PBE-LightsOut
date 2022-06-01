@@ -29,3 +29,31 @@ cells := Array2D
 
 
 ]
+
+{ #category : #accessing }
+LOGame >> newCellAt: i at: j [
+
+	"Create a cell for position (i, j) and add it to my on-screen 
+representation at the appropriate screen position. Answer a new cell"
+
+	| c origin |
+	c := LOCell new.
+	origin := self innerBounds origin.
+	self addMorph: c.
+	c position: i - 1 * c width @ (j - 1 * c height) + origin.
+	c mouseAction: [ self toggleNeighboursOfCellAt: i at: j ].
+	 ^ c
+]
+
+{ #category : #accessing }
+LOGame >> toggleNeighboursOfCellAt: i at: j [
+
+i > 1
+ ifTrue: [ (cells at: i - 1 at: j) toggleState].
+i < self cellsPerSide
+ ifTrue: [ (cells at: i + 1 at: j) toggleState].
+j > 1
+ ifTrue: [ (cells at: i at: j - 1) toggleState].
+j > self cellsPerSide
+ ifTrue: [ (cells at: i at: j + 1) toggleState].
+]

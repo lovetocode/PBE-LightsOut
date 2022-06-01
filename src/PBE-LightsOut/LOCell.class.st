@@ -18,3 +18,27 @@ onColor := Color paleBlue darker.
 self useSquareCorners. 
 self turnOff.
 ]
+
+{ #category : #accessing }
+LOCell >> mouseAction [
+
+	^ mouseAction
+]
+
+{ #category : #accessing }
+LOCell >> mouseAction: aBlock [
+
+	mouseAction := aBlock 
+]
+
+{ #category : #'event handling' }
+LOCell >> mouseMove: anEvent [
+]
+
+{ #category : #'game logic' }
+LOCell >> mouseUp: anEvent [
+
+self toggleState 
+mouseAction value
+
+]
